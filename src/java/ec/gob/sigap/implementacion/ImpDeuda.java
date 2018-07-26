@@ -25,6 +25,22 @@ public class ImpDeuda implements IntDeuda {
     @Override
     public int insertar(Deuda deuda) throws Exception {
         int insert = 0;
+        String sql = "INSERT INTO public.deuda(valor, meses_pendientes)\n"
+                + "    VALUES (?, ?);";
+        List<Parametro> prts = new ArrayList<>();
+        prts.add(new Parametro(1, deuda.getValor()));
+        prts.add(new Parametro(2, deuda.getMesesPen()));
+        if (deuda.getCodigo() != 0) {
+            sql = "INSERT INTO public.deuda(valor, meses_pendientes, codigo)\n"
+                    + "    VALUES (?, ?, ?);";
+            prts.add(new Parametro(3, deuda.getCodigo()));
+        }
+        try {
+            insert = con.querySet(sql, prts);
+        } catch (Exception e) {
+            throw e;
+        }
+        
        
         return insert;
     }
@@ -33,6 +49,22 @@ public class ImpDeuda implements IntDeuda {
     public Deuda obtenerCodigo(int id) throws Exception {
 
         Deuda deuda = null;
+        String sql = "SELECT codigo, valor, meses_pendientes "
+                + "  FROM public.deuda "
+                + "WHERE codigo=?;";
+        List<Parametro> prts = new ArrayList<>();
+        prts.add(new Parametro(1, id));
+        try {
+            ResultSet rst = con.queryGet(sql, prts);
+            while (rst.next()) {
+                deuda = new Deuda();
+                deuda.setCodigo(rst.getInt("codigo"));
+                deuda.setValor(rst.getDouble("valor"));                
+                deuda.setMesesPen(rst.getInt("meses_pendientes"));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
        
         return deuda;
     }
@@ -40,8 +72,22 @@ public class ImpDeuda implements IntDeuda {
     @Override
     public List<Deuda> obtenerTodos() throws Exception {
         
-        
         List<Deuda> lista = new ArrayList<>();
+        
+        String sql = "SELECT codigo, valor, meses_pendientes, codigo\n"
+                + "  FROM public.deuda;";
+        try {
+            ResultSet rst = con.queryGet(sql);
+            while (rst.next()) {
+                Deuda deuda = new Deuda();
+                deuda.setCodigo(rst.getInt("codigo"));
+                deuda.setValor(rst.getDouble("valor"));                
+                deuda.setMesesPen(rst.getInt("meses_pendientes"));
+                lista.add(deuda);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw e;
+        }
         
         return lista;
     }
@@ -50,13 +96,26 @@ public class ImpDeuda implements IntDeuda {
     public int actualizar(Deuda deuda) throws Exception {
         int update = 0;
         
+        String sql = "UPDATE public.deuda\n"
+                + "   SET valor=?, meses_pendientes=? "
+                + " WHERE codigo=?;";
+        List<Parametro> prts = new ArrayList<>();
+        prts.add(new Parametro(1, deuda.getValor()));
+        prts.add(new Parametro(2, deuda.getMesesPen()));
+        prts.add(new Parametro(3, deuda.getCodigo()));
+        try {
+            update = con.querySet(sql, prts);
+        } catch (Exception e) {
+            throw e;
+        }
+        
         return update;
     }
 
     @Override
     public int eliminar(int id) throws Exception {
         int delete = 0;
-        String sql = "DELETE FROM public.deudas \n"
+        String sql = "DELETE FROM public.deuda \n"
                 + " WHERE codigo=?;";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, id));

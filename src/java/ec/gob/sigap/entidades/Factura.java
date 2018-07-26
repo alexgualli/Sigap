@@ -60,6 +60,15 @@ public class Factura {
         this.medidor = medidor;
         this.deuda = deuda;
     }
+    
+    public void setFechaEmi(String fechaEmi) {
+        try {
+            this.fechaEmi = sdf.parse(fechaEmi);
+        } catch (ParseException e) {
+            System.err.println("No se ha podido definir la fecha de inicio. " + e.getMessage());
+        }
+
+    }
 
     public Deuda getDeuda() {
         return deuda;

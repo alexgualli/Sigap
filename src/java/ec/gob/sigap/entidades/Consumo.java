@@ -5,6 +5,8 @@
  */
 package ec.gob.sigap.entidades;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,6 +14,8 @@ import java.util.Date;
  * @author paul
  */
 public class Consumo {
+    
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
     private int codigo;
     private Date fecha;
@@ -30,6 +34,28 @@ public class Consumo {
         this.lecturaAct = lecturaAct;
         this.consumo = consumo;
         this.medidor = medidor;
+    }
+    
+    public Consumo(int codigo, String fecha, int lecturaAnt, int lecturaAct, double consumo, Medidor medidor) {
+        this.codigo = codigo;
+        try {
+            this.fecha =sdf.parse(fecha);
+        } catch (ParseException e) {
+            System.err.println("No se ha podido definir las fechas. " + e.getMessage());
+        }   
+        this.lecturaAnt = lecturaAnt;
+        this.lecturaAct = lecturaAct;
+        this.consumo = consumo;
+        this.medidor = medidor;
+    }
+    
+    public void setFechaNac(String fecha) {
+        try {
+            this.fecha = sdf.parse(fecha);
+        } catch (ParseException e) {
+            System.err.println("No se ha podido definir la fecha de inicio. " + e.getMessage());
+        }
+
     }
 
     public Medidor getMedidor() {

@@ -12,7 +12,7 @@ package ec.gob.sigap.entidades;
 public class DetalleFactura {
     
     private int codigo;
-    private String descipcion;
+    private String descripcion;
     private Factura factura;
     private double subtotal;
     private Consumo consumo;
@@ -31,7 +31,7 @@ public class DetalleFactura {
 
     public DetalleFactura(int codigo, String descipcion, Factura factura, double subtotal, Consumo consumo, Servicio servicio, double m3Min, double costoMin, double costoExc, double consumoAct, double consumoAnt, double consumoValor, double m3Exc, double valorM3Exc) {
         this.codigo = codigo;
-        this.descipcion = descipcion;
+        this.descripcion = descipcion;
         this.factura = factura;
         this.subtotal = subtotal;
         this.consumo = consumo;
@@ -62,12 +62,12 @@ public class DetalleFactura {
         this.codigo = codigo;
     }
 
-    public String getDescipcion() {
-        return descipcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescipcion(String descipcion) {
-        this.descipcion = descipcion;
+    public void setDescripcion(String descipcion) {
+        this.descripcion = descipcion;
     }
 
     public Factura getFactura() {
@@ -160,7 +160,7 @@ public class DetalleFactura {
     
     @Override
     public String toString(){
-        return this.descipcion+" "+this.subtotal;
+        return this.descripcion+" "+this.subtotal;
     }
     
     

@@ -45,6 +45,33 @@ public class Cliente {
         this.telefono = telefono;
         this.edad = edad;
     }
+    
+    public Cliente(int codigo, String nombre, String apellido, String direccion, String cedula, String correo, String fechaNac, int codigoDis, Deuda deuda, String telefono, int edad) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.cedula = cedula;
+        this.correo = correo;
+        try {
+            this.fechaNac =sdf.parse(fechaNac);
+        } catch (ParseException e) {
+            System.err.println("No se ha podido definir las fechas. " + e.getMessage());
+        }   
+        this.codigoDis = codigoDis;
+        this.deuda = deuda;
+        this.telefono = telefono;
+        this.edad = edad;
+    }
+    
+    public void setFechaNac(String fechaNac) {
+        try {
+            this.fechaNac = sdf.parse(fechaNac);
+        } catch (ParseException e) {
+            System.err.println("No se ha podido definir la fecha de inicio. " + e.getMessage());
+        }
+
+    }
 
     public int getCodigo() {
         return codigo;
