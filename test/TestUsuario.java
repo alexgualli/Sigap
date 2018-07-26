@@ -1,6 +1,6 @@
 
-import ec.gob.senagua.entidades.Usuario;
-import ec.gob.senagua.implementacion.ImpUsuario;
+import ec.gob.sigap.entidades.Usuario;
+import ec.gob.sigap.implementacion.ImpUsuario;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;

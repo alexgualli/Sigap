@@ -1,7 +1,7 @@
 
-import ec.gob.senagua.entidades.Cliente;
-import ec.gob.senagua.entidades.Medidor;
-import ec.gob.senagua.implementacion.ImpMedidor;
+import ec.gob.sigap.entidades.Cliente;
+import ec.gob.sigap.entidades.Medidor;
+import ec.gob.sigap.implementacion.ImpMedidor;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;

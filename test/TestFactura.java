@@ -1,9 +1,9 @@
 
-import ec.gob.senagua.entidades.Cliente;
-import ec.gob.senagua.entidades.DetalleFactura;
-import ec.gob.senagua.entidades.Factura;
-import ec.gob.senagua.entidades.Usuario;
-import ec.gob.senagua.implementacion.ImpFactura;
+import ec.gob.sigap.entidades.Cliente;
+import ec.gob.sigap.entidades.DetalleFactura;
+import ec.gob.sigap.entidades.Factura;
+import ec.gob.sigap.entidades.Usuario;
+import ec.gob.sigap.implementacion.ImpFactura;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;

@@ -1,5 +1,5 @@
-import ec.gob.senagua.entidades.Servicio;
-import ec.gob.senagua.implementacion.ImpServicio;
+import ec.gob.sigap.entidades.Servicio;
+import ec.gob.sigap.implementacion.ImpServicio;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;

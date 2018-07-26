@@ -1,7 +1,7 @@
 
 
-import ec.gob.senagua.entidades.Cliente;
-import ec.gob.senagua.implementacion.ImpCliente;
+import ec.gob.sigap.entidades.Cliente;
+import ec.gob.sigap.implementacion.ImpCliente;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;
