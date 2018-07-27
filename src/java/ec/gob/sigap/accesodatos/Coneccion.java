@@ -18,7 +18,7 @@ public class Coneccion {
  
     private Connection connnection;
     final String DRIVER = "org.postgresql.Driver";
-    final String URL = "jdbc:postgresql://localhost:5433/mibase";
+    final String URL = "jdbc:postgresql://localhost:5433/mibase2";
     final String USER = "postgres";
     final String PASSWORD = "alex";
 

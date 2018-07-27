@@ -42,7 +42,7 @@ public class ImpCliente implements IntCliente {
         prts.add(new Parametro(10, cliente.getEdad()));
 
         if (cliente.getCodigo() != 0) {
-            sql = "INSERT INTO cliente(codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, codigo_deuda, telefono, edad)\n"
+            sql = "INSERT INTO cliente(nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, codigo_deuda, telefono, edad, codigo)\n"
                     + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             prts.add(new Parametro(11, cliente.getCodigo()));
         }
@@ -73,7 +73,7 @@ public class ImpCliente implements IntCliente {
             ResultSet rst = con.queryGet(sql, prts);
             while (rst.next()) {
                 cliente = new Cliente();
-                cliente.setCodigo(rst.getInt("cosdigo"));
+                cliente.setCodigo(rst.getInt("codigo"));
                 cliente.setNombre(rst.getString("nombre"));
                 cliente.setApellido(rst.getString("apellido"));
                 cliente.setDireccion(rst.getString("direccion"));
@@ -104,7 +104,7 @@ public class ImpCliente implements IntCliente {
             ResultSet rst = con.queryGet(sql);
             while (rst.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setCodigo(rst.getInt("cosdigo"));
+                cliente.setCodigo(rst.getInt("codigo"));
                 cliente.setNombre(rst.getString("nombre"));
                 cliente.setApellido(rst.getString("apellido"));
                 cliente.setDireccion(rst.getString("direccion"));

@@ -165,7 +165,7 @@ public class Cliente {
     
      @Override
     public String toString(){
-        return this.cedula+" "+this.nombre+" "+this.apellido;
+        return this.cedula+" "+this.nombre+" "+this.apellido+" "+this.fechaNac;
     }
 
     

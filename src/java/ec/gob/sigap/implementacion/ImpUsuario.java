@@ -38,7 +38,7 @@ public class ImpUsuario implements IntUsuario {
         prts.add(new Parametro(8, usuario.getCedula()));
         prts.add(new Parametro(9, usuario.getGenero()));
         if (usuario.getCodigo() != 0) {
-            sql = "IINSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero, codigo)\n"
+            sql = "INSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero, codigo)\n"
                     + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             prts.add(new Parametro(10, usuario.getCodigo()));
 
@@ -70,7 +70,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setClave(rst.getString("clave"));
                 usuario.setTipo(rst.getString("tipo"));
                 usuario.setApellido(rst.getString("apellido"));
-                usuario.setCorreo(rst.getString("coreo"));
+                usuario.setCorreo(rst.getString("correo"));
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
@@ -102,7 +102,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setClave(rst.getString("clave"));
                 usuario.setTipo(rst.getString("tipo"));
                 usuario.setApellido(rst.getString("apellido"));
-                usuario.setCorreo(rst.getString("coreo"));
+                usuario.setCorreo(rst.getString("correo"));
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
@@ -131,7 +131,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setClave(rst.getString("clave"));
                 usuario.setTipo(rst.getString("tipo"));
                 usuario.setApellido(rst.getString("apellido"));
-                usuario.setCorreo(rst.getString("coreo"));
+                usuario.setCorreo(rst.getString("correo"));
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
@@ -164,6 +164,12 @@ public class ImpUsuario implements IntUsuario {
         prts.add(new Parametro(8, usuario.getCedula()));
         prts.add(new Parametro(9, usuario.getGenero()));
         prts.add(new Parametro(10, usuario.getCodigo()));
+        
+        try {
+            update=con.querySet(sql, prts);     
+        } catch (Exception e) {
+            throw e;
+        }    
         
         return update;
     }

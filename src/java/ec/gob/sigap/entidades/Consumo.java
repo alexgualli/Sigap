@@ -49,7 +49,7 @@ public class Consumo {
         this.medidor = medidor;
     }
     
-    public void setFechaNac(String fecha) {
+    public void setFecha(String fecha) {
         try {
             this.fecha = sdf.parse(fecha);
         } catch (ParseException e) {
@@ -104,6 +104,10 @@ public class Consumo {
 
     public void setConsumo(double consumo) {
         this.consumo = consumo;
+    }
+    
+    public String toString(){
+        return this.fecha+" "+this.lecturaAnt+" "+this.lecturaAct+" "+this.consumo;
     }
     
     

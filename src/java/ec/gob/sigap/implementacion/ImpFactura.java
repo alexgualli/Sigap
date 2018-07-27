@@ -134,7 +134,7 @@ public class ImpFactura implements IntFactura {
         
         String sql = "UPDATE public.factura\n"
                 + "   SET codigo_cliente=?, codigo_usuario=?, observacion=?, \n"
-                + "       estado=?, fecha_de_emision=?, total=?, descuento=?, codigo_medidor=?, codigo_medidor=? \n"
+                + "       estado=?, fecha_de_emision=?, total=?, descuento=?, codigo_medidor=?, codigo_deuda=? \n"
                 + " WHERE codigo=?;";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, factura.getCliente().getCodigo()));
