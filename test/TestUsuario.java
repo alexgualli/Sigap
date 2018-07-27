@@ -29,9 +29,9 @@ public class TestUsuario {
         usuario.setClave("alex");
         usuario.setCodigo(100);
         usuario.setCorreo("gualli@hotmail.com");
-        usuario.setDireccion("");
+        usuario.setDireccion("dolo");
         usuario.setGenero("masculino");
-        usuario.setNivel(1);
+        usuario.setNivel(2);
         usuario.setNombre("alex");
         usuario.setTipo("administrador");
         usuario.setNombreUsu("gualli");
@@ -110,7 +110,7 @@ public class TestUsuario {
         
         update = 0;
         try {
-            usuario.setClave("unach");
+            usuario.setClave("1234");
             update = user.actualizarClave(usuario);
             if (update > 0) {
                 System.out.println("ACTUALIZADO CLAVE: " + usuario.toString());
@@ -121,17 +121,17 @@ public class TestUsuario {
         assertTrue(update > 0);
         
         
-//        //OBTENER NIVEL
-//        int nivel = 0;
-//        try {
-//            nivel = user.obtenerNivel(usuario.getNombreUsu(), usuario.getClave());
-//            if (nivel != 0) {
-//                System.out.println("NIVEL: " + nivel);
-//            }
-//        } catch (Exception e) {
-//            System.err.println("¡ERROR! NO SE PUDO OBTENER EL CODIGO" + e);
-//        }
-//        assertTrue(nivel > 0);
+        //OBTENER NIVEL
+        int nivel = 0;
+        try {
+            nivel = user.obtenerNivel(usuario.getNombreUsu(), usuario.getClave());
+            if (nivel != 0) {
+                System.out.println("NIVEL: " + nivel);
+            }
+        } catch (Exception e) {
+            System.err.println("¡ERROR! NO SE PUDO OBTENER EL CODIGO" + e);
+        }
+        assertTrue(nivel > 0);
         
         //ELIMINAR
         int delete = 0;
