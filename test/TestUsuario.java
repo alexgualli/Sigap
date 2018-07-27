@@ -110,7 +110,7 @@ public class TestUsuario {
         
         update = 0;
         try {
-            usuario.setClave("gualli");
+            usuario.setClave("unach");
             update = user.actualizarClave(usuario);
             if (update > 0) {
                 System.out.println("ACTUALIZADO CLAVE: " + usuario.toString());
