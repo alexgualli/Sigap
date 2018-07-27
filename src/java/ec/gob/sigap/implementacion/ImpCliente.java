@@ -25,9 +25,8 @@ public class ImpCliente implements IntCliente {
     public int insertar(Cliente cliente) throws Exception {
 
         int insert = 0;
-        String sql = "INSERT INTO cliente(nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, "
-                + "codigo_deuda, telefono, edad)\n"
-                + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO cliente(nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, telefono, edad)\n"
+                + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, cliente.getNombre()));
@@ -37,14 +36,13 @@ public class ImpCliente implements IntCliente {
         prts.add(new Parametro(5, cliente.getCorreo()));
         prts.add(new Parametro(6, cliente.getFechaNac()));
         prts.add(new Parametro(7, cliente.getCodigoDis()));
-        prts.add(new Parametro(8, cliente.getDeuda().getCodigo()));
-        prts.add(new Parametro(9, cliente.getTelefono()));
-        prts.add(new Parametro(10, cliente.getEdad()));
+        prts.add(new Parametro(8, cliente.getTelefono()));
+        prts.add(new Parametro(9, cliente.getEdad()));
 
         if (cliente.getCodigo() != 0) {
-            sql = "INSERT INTO cliente(nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, codigo_deuda, telefono, edad, codigo)\n"
-                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-            prts.add(new Parametro(11, cliente.getCodigo()));
+            sql = "INSERT INTO cliente(nombre, apellido, direccion, cedula, correo, fecha_nac, codigo_discapacidad, telefono, edad, codigo)\n"
+                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            prts.add(new Parametro(10, cliente.getCodigo()));
         }
         try {
             insert = con.querySet(sql, prts);
@@ -64,7 +62,7 @@ public class ImpCliente implements IntCliente {
 
         Cliente cliente = null;
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
-                + "       codigo_discapacidad, codigo_deuda, telefono, edad\n"
+                + "       codigo_discapacidad, telefono, edad\n"
                 + "  FROM cliente "
                 + "WHERE codigo = ?; ";
         List<Parametro> prts = new ArrayList<>();
@@ -80,8 +78,7 @@ public class ImpCliente implements IntCliente {
                 cliente.setCedula(rst.getString("cedula"));
                 cliente.setCorreo(rst.getString("correo"));
                 cliente.setFechaNac(rst.getString("fecha_nac"));
-                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));
-                cliente.setDeuda(impDeuda.obtenerCodigo(rst.getInt("codigo_deuda")));
+                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
                 cliente.setTelefono(rst.getString("telefono"));
                 cliente.setEdad(rst.getInt("edad"));
 
@@ -98,7 +95,7 @@ public class ImpCliente implements IntCliente {
 
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
-                + "       codigo_discapacidad, codigo_deuda, telefono, edad\n"
+                + "       codigo_discapacidad, telefono, edad\n"
                 + "  FROM cliente order by apellido ASC;";
         try {
             ResultSet rst = con.queryGet(sql);
@@ -111,8 +108,7 @@ public class ImpCliente implements IntCliente {
                 cliente.setCedula(rst.getString("cedula"));
                 cliente.setCorreo(rst.getString("correo"));
                 cliente.setFechaNac(rst.getString("fecha_nac"));
-                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));
-                cliente.setDeuda(impDeuda.obtenerCodigo(rst.getInt("codigo_deuda")));
+                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
                 cliente.setTelefono(rst.getString("telefono"));
                 cliente.setEdad(rst.getInt("edad"));
                 lista.add(cliente);
@@ -130,7 +126,7 @@ public class ImpCliente implements IntCliente {
 
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
-                + "       codigo_discapacidad, codigo_deuda, telefono, edad\n"
+                + "       codigo_discapacidad, telefono, edad\n"
                 + "  FROM cliente WHERE nombre LIKE '" + dato + "%' OR cedula LIKE '" + dato + "%' "
                 + "order by apellido ASC;";
         try {
@@ -145,8 +141,7 @@ public class ImpCliente implements IntCliente {
                 cliente.setCedula(rst.getString("cedula"));
                 cliente.setCorreo(rst.getString("correo"));
                 cliente.setFechaNac(rst.getString("fecha_nac"));
-                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));
-                cliente.setDeuda(impDeuda.obtenerCodigo(rst.getInt("codigo_deuda")));
+                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
                 cliente.setTelefono(rst.getString("telefono"));
                 cliente.setEdad(rst.getInt("edad"));
                 lista.add(cliente);
@@ -163,7 +158,7 @@ public class ImpCliente implements IntCliente {
         int update = 0;
         String sql = "UPDATE cliente\n"
                 + "   SET nombre=?, apellido=?, direccion=?, cedula=?, correo=?, \n"
-                + "       fecha_nac=?, codigo_discapacidad=?, codigo_deuda=?, telefono=?, \n"
+                + "       fecha_nac=?, codigo_discapacidad=?, telefono=?, \n"
                 + "       edad=?\n"
                 + " WHERE codigo =  ?;";
 
@@ -175,10 +170,10 @@ public class ImpCliente implements IntCliente {
         prts.add(new Parametro(5, cliente.getCorreo()));
         prts.add(new Parametro(6, cliente.getFechaNac()));
         prts.add(new Parametro(7, cliente.getCodigoDis()));
-        prts.add(new Parametro(8, cliente.getDeuda().getCodigo()));
-        prts.add(new Parametro(9, cliente.getTelefono()));
-        prts.add(new Parametro(10, cliente.getEdad()));
-        prts.add(new Parametro(11, cliente.getCodigo()));
+        
+        prts.add(new Parametro(8, cliente.getTelefono()));
+        prts.add(new Parametro(9, cliente.getEdad()));
+        prts.add(new Parametro(10, cliente.getCodigo()));
         try {
             update = con.querySet(sql, prts);
         } catch (Exception e) {

@@ -25,14 +25,13 @@ public class Cliente {
     private String correo;
     private Date fechaNac;
     private int codigoDis;
-    private Deuda deuda;
     private String telefono;
     private int edad;
 
     public Cliente() {
     }
 
-    public Cliente(int codigo, String nombre, String apellido, String direccion, String cedula, String correo, Date fechaNac, int codigoDis, Deuda deuda, String telefono, int edad) {
+    public Cliente(int codigo, String nombre, String apellido, String direccion, String cedula, String correo, Date fechaNac, int codigoDis, String telefono, int edad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -41,12 +40,11 @@ public class Cliente {
         this.correo = correo;
         this.fechaNac = fechaNac;
         this.codigoDis = codigoDis;
-        this.deuda = deuda;
         this.telefono = telefono;
         this.edad = edad;
     }
     
-    public Cliente(int codigo, String nombre, String apellido, String direccion, String cedula, String correo, String fechaNac, int codigoDis, Deuda deuda, String telefono, int edad) {
+    public Cliente(int codigo, String nombre, String apellido, String direccion, String cedula, String correo, String fechaNac, int codigoDis, String telefono, int edad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -59,7 +57,6 @@ public class Cliente {
             System.err.println("No se ha podido definir las fechas. " + e.getMessage());
         }   
         this.codigoDis = codigoDis;
-        this.deuda = deuda;
         this.telefono = telefono;
         this.edad = edad;
     }
@@ -135,14 +132,6 @@ public class Cliente {
 
     public void setCodigoDis(int codigoDis) {
         this.codigoDis = codigoDis;
-    }
-
-    public Deuda getDeuda() {
-        return deuda;
-    }
-
-    public void setDeuda(Deuda deuda) {
-        this.deuda = deuda;
     }
 
     public String getTelefono() {

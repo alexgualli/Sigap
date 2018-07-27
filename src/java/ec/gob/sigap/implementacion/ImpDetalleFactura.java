@@ -86,7 +86,7 @@ public class ImpDetalleFactura implements IntDetalleFactura {
                 detalle.setSubtotal(rst.getDouble("subtotal"));
                 detalle.setConsumo(impConsumo.obtenerCodigo(rst.getInt("codigo_consumo")));
                 detalle.setServicio(impServicio.obtenerCodigo(rst.getInt("codigo_servicio")));
-                detalle.setM3Min(rst.getInt("m3_minimo"));
+                detalle.setM3Min(rst.getDouble("m3_minimo"));
                 detalle.setCostoMin(rst.getDouble("costo_minimo"));
                 detalle.setCostoExc(rst.getDouble("costo_excedente"));
                 detalle.setConsumoAct(rst.getDouble("consumo_actual"));
@@ -125,7 +125,7 @@ public class ImpDetalleFactura implements IntDetalleFactura {
                 detalle.setSubtotal(rst.getDouble("subtotal"));
                 detalle.setConsumo(impConsumo.obtenerCodigo(rst.getInt("codigo_consumo")));
                 detalle.setServicio(impServicio.obtenerCodigo(rst.getInt("codigo_servicio")));
-                detalle.setM3Min(rst.getInt("m3_minimo"));
+                detalle.setM3Min(rst.getDouble("m3_minimo"));
                 detalle.setCostoMin(rst.getDouble("costo_minimo"));
                 detalle.setCostoExc(rst.getDouble("costo_excedente"));
                 detalle.setConsumoAct(rst.getDouble("consumo_actual"));
