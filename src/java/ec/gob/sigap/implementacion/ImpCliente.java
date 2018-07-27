@@ -10,6 +10,7 @@ import ec.gob.sigap.accesodatos.Parametro;
 import ec.gob.sigap.dao.contrato.IntCliente;
 import ec.gob.sigap.entidades.Cliente;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,39 +120,7 @@ public class ImpCliente implements IntCliente {
         return lista;
     }
 
-    @Override
-    public List<Cliente> obtenerDato(String dato) throws Exception {
-
-        ImpDeuda impDeuda = new ImpDeuda();
-
-        List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
-                + "       codigo_discapacidad, telefono, edad\n"
-                + "  FROM cliente WHERE nombre LIKE '" + dato + "%' OR cedula LIKE '" + dato + "%' "
-                + "order by apellido ASC;";
-        try {
-            ResultSet rst = con.queryGet(sql);
-            while (rst.next()) {
-
-                Cliente cliente = new Cliente();
-                cliente.setCodigo(rst.getInt("cosdigo"));
-                cliente.setNombre(rst.getString("nombre"));
-                cliente.setApellido(rst.getString("apellido"));
-                cliente.setDireccion(rst.getString("direccion"));
-                cliente.setCedula(rst.getString("cedula"));
-                cliente.setCorreo(rst.getString("correo"));
-                cliente.setFechaNac(rst.getString("fecha_nac"));
-                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
-                cliente.setTelefono(rst.getString("telefono"));
-                cliente.setEdad(rst.getInt("edad"));
-                lista.add(cliente);
-            }
-        } catch (Exception e) {
-
-        }
-
-        return lista;
-    }
+   
 
     @Override
     public int actualizar(Cliente cliente) throws Exception {
@@ -160,7 +129,7 @@ public class ImpCliente implements IntCliente {
                 + "   SET nombre=?, apellido=?, direccion=?, cedula=?, correo=?, \n"
                 + "       fecha_nac=?, codigo_discapacidad=?, telefono=?, \n"
                 + "       edad=?\n"
-                + " WHERE codigo =  ?;";
+                + " WHERE codigo=?;";
 
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, cliente.getNombre()));
@@ -169,8 +138,7 @@ public class ImpCliente implements IntCliente {
         prts.add(new Parametro(4, cliente.getCedula()));
         prts.add(new Parametro(5, cliente.getCorreo()));
         prts.add(new Parametro(6, cliente.getFechaNac()));
-        prts.add(new Parametro(7, cliente.getCodigoDis()));
-        
+        prts.add(new Parametro(7, cliente.getCodigoDis()));        
         prts.add(new Parametro(8, cliente.getTelefono()));
         prts.add(new Parametro(9, cliente.getEdad()));
         prts.add(new Parametro(10, cliente.getCodigo()));
@@ -195,6 +163,61 @@ public class ImpCliente implements IntCliente {
             throw e;
         }
         return delete;
+    }
+
+    @Override
+    public List<Cliente> obtenerCedNom(String dato) throws Exception {
+        List<Cliente> lista = new ArrayList<>();
+        String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
+                + "       codigo_discapacidad, telefono, edad\n"
+                + "  FROM cliente WHERE nombre LIKE '" + dato + "%' OR cedula LIKE '" + dato + "%' "
+                + "order by apellido ASC;";
+        try {
+            ResultSet rst = con.queryGet(sql);
+            while (rst.next()) {
+
+                Cliente cliente = new Cliente();
+                cliente.setCodigo(rst.getInt("codigo"));
+                cliente.setNombre(rst.getString("nombre"));
+                cliente.setApellido(rst.getString("apellido"));
+                cliente.setDireccion(rst.getString("direccion"));
+                cliente.setCedula(rst.getString("cedula"));
+                cliente.setCorreo(rst.getString("correo"));
+                cliente.setFechaNac(rst.getString("fecha_nac"));
+                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
+                cliente.setTelefono(rst.getString("telefono"));
+                cliente.setEdad(rst.getInt("edad"));
+                lista.add(cliente);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw e;
+        }
+
+        return lista;
+    }
+
+    @Override
+    public int obtenerCodCed(String cedula) throws Exception {
+        int codigo =0;
+        String sql = "SELECT codigo \n"
+                + "  FROM cliente "
+                + "WHERE cedula=?";
+        List<Parametro> prts = new ArrayList<>();
+        
+        prts.add(new Parametro(1, cedula));
+        
+        try {
+            ResultSet rst = con.queryGet(sql,prts);
+            while (rst.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setCodigo(rst.getInt("codigo"));
+                codigo= cliente.getCodigo();
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        
+        return codigo;
     }
 
 }
