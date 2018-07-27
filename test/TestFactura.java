@@ -36,7 +36,7 @@ public class TestFactura {
 
         deuda.setCodigo(1);
         cliente.setCodigo(1);
-        medidor.setCodigo("alex");
+        medidor.setCodigo("alex1997");
         usuario.setCodigo(1);
         
         factura.setCodigo(100);

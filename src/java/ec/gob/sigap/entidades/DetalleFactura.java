@@ -106,7 +106,7 @@ public class DetalleFactura {
         return m3Min;
     }
 
-    public void setM3Min(int m3Min) {
+    public void setM3Min(double m3Min) {
         this.m3Min = m3Min;
     }
 

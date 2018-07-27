@@ -26,10 +26,14 @@ public class TestDeuda {
        ImpDeuda imp = new ImpDeuda();
         
         Deuda deuda = new Deuda();
+        Cliente cliente = new Cliente();
+        
+        cliente.setCodigo(1);
         
         deuda.setCodigo(100);
         deuda.setMesesPen(10);
         deuda.setValor(10);
+        deuda.setCliente(cliente);
         
         //INSERTAR 
         int insert = 0;

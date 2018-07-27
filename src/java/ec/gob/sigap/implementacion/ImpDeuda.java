@@ -25,15 +25,16 @@ public class ImpDeuda implements IntDeuda {
     @Override
     public int insertar(Deuda deuda) throws Exception {
         int insert = 0;
-        String sql = "INSERT INTO public.deuda(valor, meses_pendientes)\n"
-                + "    VALUES (?, ?);";
+        String sql = "INSERT INTO public.deuda(valor, meses_pendientes, codigo_cliente codigo_cliente)\n"
+                + "    VALUES (?, ?, ?);";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, deuda.getValor()));
         prts.add(new Parametro(2, deuda.getMesesPen()));
+        prts.add(new Parametro(3, deuda.getCliente().getCodigo()));
         if (deuda.getCodigo() != 0) {
-            sql = "INSERT INTO public.deuda(valor, meses_pendientes, codigo)\n"
-                    + "    VALUES (?, ?, ?);";
-            prts.add(new Parametro(3, deuda.getCodigo()));
+            sql = "INSERT INTO public.deuda(valor, meses_pendientes, codigo_cliente, codigo)\n"
+                    + "    VALUES (?, ?, ?, ?);";
+            prts.add(new Parametro(4, deuda.getCodigo()));
         }
         try {
             insert = con.querySet(sql, prts);
@@ -47,9 +48,11 @@ public class ImpDeuda implements IntDeuda {
 
     @Override
     public Deuda obtenerCodigo(int id) throws Exception {
+        
+        ImpCliente cliente = new ImpCliente();
 
         Deuda deuda = null;
-        String sql = "SELECT codigo, valor, meses_pendientes "
+        String sql = "SELECT codigo, valor, meses_pendientes, codigo_cliente"
                 + "  FROM public.deuda "
                 + "WHERE codigo=?;";
         List<Parametro> prts = new ArrayList<>();
@@ -61,6 +64,7 @@ public class ImpDeuda implements IntDeuda {
                 deuda.setCodigo(rst.getInt("codigo"));
                 deuda.setValor(rst.getDouble("valor"));                
                 deuda.setMesesPen(rst.getInt("meses_pendientes"));
+                deuda.setCliente(cliente.obtenerCodigo(rst.getInt("codigo_cliente")));
             }
         } catch (Exception e) {
             throw e;
@@ -72,9 +76,11 @@ public class ImpDeuda implements IntDeuda {
     @Override
     public List<Deuda> obtenerTodos() throws Exception {
         
+        ImpCliente cliente = new ImpCliente();
+        
         List<Deuda> lista = new ArrayList<>();
         
-        String sql = "SELECT codigo, valor, meses_pendientes, codigo\n"
+        String sql = "SELECT codigo, valor, meses_pendientes, codigo_cliente, codigo\n"
                 + "  FROM public.deuda;";
         try {
             ResultSet rst = con.queryGet(sql);
@@ -83,6 +89,7 @@ public class ImpDeuda implements IntDeuda {
                 deuda.setCodigo(rst.getInt("codigo"));
                 deuda.setValor(rst.getDouble("valor"));                
                 deuda.setMesesPen(rst.getInt("meses_pendientes"));
+                deuda.setCliente(cliente.obtenerCodigo(rst.getInt("codigo_cliente")));
                 lista.add(deuda);
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -97,12 +104,13 @@ public class ImpDeuda implements IntDeuda {
         int update = 0;
         
         String sql = "UPDATE public.deuda\n"
-                + "   SET valor=?, meses_pendientes=? "
+                + "   SET valor=?, meses_pendientes=?, codigo_cliente=? "
                 + " WHERE codigo=?;";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, deuda.getValor()));
         prts.add(new Parametro(2, deuda.getMesesPen()));
-        prts.add(new Parametro(3, deuda.getCodigo()));
+        prts.add(new Parametro(3, deuda.getCliente().getCodigo()));
+        prts.add(new Parametro(4, deuda.getCodigo()));
         try {
             update = con.querySet(sql, prts);
         } catch (Exception e) {

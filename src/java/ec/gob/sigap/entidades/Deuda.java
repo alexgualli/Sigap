@@ -13,22 +13,31 @@ public class Deuda {
     private int codigo;
     private double valor;
     private int mesesPen;
+    private Cliente cliente;
 
     public Deuda() {
     }
 
-    public Deuda(int codigo, double valor, int mesesPen) {
+    public Deuda(int codigo, double valor, int mesesPen, Cliente cliente) {
         this.codigo = codigo;
         this.valor = valor;
         this.mesesPen = mesesPen;
+        this.cliente = cliente;
     }
 
-    public int getMesesPen() {
-        return mesesPen;
+    
+    
+    @Override
+    public String toString(){
+        return this.mesesPen+" "+this.valor;
     }
 
-    public void setMesesPen(int mesesPen) {
-        this.mesesPen = mesesPen;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public int getCodigo() {
@@ -46,10 +55,13 @@ public class Deuda {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
-    @Override
-    public String toString(){
-        return this.mesesPen+" "+this.valor;
+
+    public int getMesesPen() {
+        return mesesPen;
+    }
+
+    public void setMesesPen(int mesesPen) {
+        this.mesesPen = mesesPen;
     }
     
 }

@@ -25,8 +25,6 @@ public class TestCliente {
     public void test() {
         
         ImpCliente imp = new ImpCliente();
-        
-        Deuda deuda = new Deuda();
         Cliente cliente = new Cliente();
         
         
@@ -42,8 +40,6 @@ public class TestCliente {
         cliente.setDireccion("la dolo");
         cliente.setFechaNac("13-03-1997");
         cliente.setTelefono("0958995049");
-        deuda.setCodigo(1);
-        cliente.setDeuda(deuda);
         cliente.setEdad(20);
         
         
