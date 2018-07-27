@@ -20,11 +20,11 @@ public class Usuario {
     private String direccion;
     private String cedula;
     private String genero;
-
+    private String nombreUsu;
     public Usuario() {
     }
 
-    public Usuario(int codigo, String nombre, String clave, String tipo, String apellido, String correo, int nivel, String direccion, String cedula, String genero) {
+    public Usuario(int codigo, String nombre, String clave, String tipo, String apellido, String correo, int nivel, String direccion, String cedula, String genero, String nombreUsu) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.clave = clave;
@@ -35,7 +35,10 @@ public class Usuario {
         this.direccion = direccion;
         this.cedula = cedula;
         this.genero = genero;
+        this.nombreUsu = nombreUsu;
     }
+
+    
 
     public int getCodigo() {
         return codigo;
@@ -119,7 +122,15 @@ public class Usuario {
 
     @Override
     public String toString(){
-        return this.nombre+" "+this.apellido+" "+this.tipo;
+        return this.nombreUsu+" "+this.correo+" "+this.clave;
+    }
+
+    public String getNombreUsu() {
+        return nombreUsu;
+    }
+
+    public void setNombreUsu(String nombreUsu) {
+        this.nombreUsu = nombreUsu;
     }
     
     
