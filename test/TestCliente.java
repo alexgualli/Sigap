@@ -94,7 +94,7 @@ public class TestCliente {
         assertTrue(lista.size() >0);     
         
         //OBTENER POR CEDULA O NOMBRE
-        String dato ="06041";
+        String dato ="06044";
         List<Cliente> listaCedNom = new ArrayList<>();
         try {
             listaCedNom = imp.obtenerCedNom(dato);
