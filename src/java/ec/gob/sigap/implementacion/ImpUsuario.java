@@ -229,12 +229,10 @@ public class ImpUsuario implements IntUsuario {
 
         String sql = "UPDATE usuario\n"
                 + "   SET clave=? \n"
-                + " WHERE nombre_usuario=? OR correo=?;";
+                + " WHERE nombre_usuario='"+usuario.getNombreUsu()+"' OR correo='"+usuario.getCorreo()+"' ;";
 
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, usuario.getClave()));
-        prts.add(new Parametro(2, usuario.getCorreo()));
-        prts.add(new Parametro(3, usuario.getNombreUsu()));
 
         try {
             update = con.querySet(sql, prts);
@@ -251,15 +249,14 @@ public class ImpUsuario implements IntUsuario {
         String sql = "SELECT nivel "
                 + "FROM usuario  "
                 + "WHERE nombre_usuario = ? and clave = ?";
-        List<Parametro> prts = new ArrayList<>();        
+        List<Parametro> prts = new ArrayList<>(); 
+        System.out.println(usua+" "+clave);
         prts.add(new Parametro(1, usua));
         prts.add(new Parametro(2, clave));        
         try {
             ResultSet rst = con.queryGet(sql,prts);
-            while (rst.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setNivel(rst.getInt("nivel"));
-                nivel= usuario.getNivel();
+            while (rst.next()) {                
+                nivel= rst.getInt(1);
             }
         } catch (SQLException e) {
             throw e;
