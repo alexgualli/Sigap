@@ -119,6 +119,20 @@ public class TestUsuario {
             System.err.println("¡ERROR! NO SE PUDO ACTUALIZAR" + e);
         }
         assertTrue(update > 0);
+        
+        
+//        //OBTENER NIVEL
+//        int nivel = 0;
+//        try {
+//            nivel = user.obtenerNivel(usuario.getNombreUsu(), usuario.getClave());
+//            if (nivel != 0) {
+//                System.out.println("NIVEL: " + nivel);
+//            }
+//        } catch (Exception e) {
+//            System.err.println("¡ERROR! NO SE PUDO OBTENER EL CODIGO" + e);
+//        }
+//        assertTrue(nivel > 0);
+        
         //ELIMINAR
         int delete = 0;
         try {

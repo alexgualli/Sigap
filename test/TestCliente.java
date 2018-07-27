@@ -109,7 +109,7 @@ public class TestCliente {
         
         
         
-        //OBTENER EL CODIGO POR CEDULA O NOMBRE 
+        //OBTENER EL CODIGO POR CEDULA
         int cod=0;
         try {
             cod = imp.obtenerCodCed("0604405357");
