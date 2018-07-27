@@ -22,6 +22,12 @@ public interface IntUsuario {
     public Usuario obtenerLogin(String usuario, String clave) throws Exception;
 
     public List<Usuario> obtenerTodos() throws Exception;
+    
+    public Usuario obtenerCorreoUsuario(String dato) throws Exception;
+    
+    public int actualizarClave(Usuario usuario) throws Exception;  
+    
+    public int obtenerNivel(String usua, String clave) throws Exception;
 
     public int actualizar(Usuario usuario) throws Exception;
 

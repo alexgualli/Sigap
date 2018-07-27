@@ -25,8 +25,8 @@ public class ImpUsuario implements IntUsuario {
     @Override
     public int insertar(Usuario usuario) throws Exception {
         int insert = 0;
-        String sql = "INSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero)\n"
-                + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero, nombre_usuario)\n"
+                + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, usuario.getNombre()));
         prts.add(new Parametro(2, usuario.getClave()));
@@ -37,10 +37,11 @@ public class ImpUsuario implements IntUsuario {
         prts.add(new Parametro(7, usuario.getDireccion()));
         prts.add(new Parametro(8, usuario.getCedula()));
         prts.add(new Parametro(9, usuario.getGenero()));
+        prts.add(new Parametro(10, usuario.getNombreUsu()));
         if (usuario.getCodigo() != 0) {
-            sql = "INSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero, codigo)\n"
-                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-            prts.add(new Parametro(10, usuario.getCodigo()));
+            sql = "INSERT INTO usuario(nombre, clave, tipo, apellido, correo, nivel, direccion, cedula, genero,nombre_usuario, codigo)\n"
+                    + "    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            prts.add(new Parametro(11, usuario.getCodigo()));
 
         }
         try {
@@ -57,7 +58,7 @@ public class ImpUsuario implements IntUsuario {
         Usuario usuario = null;
 
         String sql = "SELECT codigo, nombre, clave, tipo, apellido, correo, nivel, direccion, \n"
-                + "       cedula, genero\n"
+                + "       cedula, genero, nombre_usuario\n"
                 + "  FROM usuario where codigo = ?;";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, id));
@@ -74,6 +75,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
+                usuario.setNombreUsu(rst.getString("nombre_usuario"));
 
             }
         } catch (Exception e) {
@@ -88,8 +90,8 @@ public class ImpUsuario implements IntUsuario {
         Usuario usuario = null;
 
         String sql = "SELECT codigo, nombre, clave, tipo, apellido, correo, nivel, direccion, \n"
-                + "       cedula, genero\n"
-                + "  FROM usuario where nombre = ? and clave = ? ;";
+                + "       cedula, genero, nombre_usuario \n"
+                + "  FROM usuario where nombre_usuario = ? and clave = ? ;";
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, nombre));
         prts.add(new Parametro(2, clave));
@@ -106,7 +108,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
-
+                usuario.setNombreUsu(rst.getString("nombre_usuario"));
             }
         } catch (Exception e) {
             throw e;
@@ -120,7 +122,7 @@ public class ImpUsuario implements IntUsuario {
         List<Usuario> lista = new ArrayList<>();
 
         String sql = "SELECT codigo, nombre, clave, tipo, apellido, correo, nivel, direccion, \n"
-                + "       cedula, genero\n"
+                + "       cedula, genero, nombre_usuario\n"
                 + "  FROM usuario order by nombre ASC;";
         try {
             ResultSet rst = con.queryGet(sql);
@@ -135,6 +137,7 @@ public class ImpUsuario implements IntUsuario {
                 usuario.setNivel(rst.getInt("nivel"));
                 usuario.setCedula(rst.getString("cedula"));
                 usuario.setGenero(rst.getString("genero"));
+                usuario.setNombreUsu(rst.getString("nombre_usuario"));
                 lista.add(usuario);
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -150,9 +153,9 @@ public class ImpUsuario implements IntUsuario {
 
         String sql = "UPDATE usuario\n"
                 + "   SET nombre=?, clave=?, tipo=?, apellido=?, correo=?, nivel=?, \n"
-                + "       direccion=?, cedula=?, genero=?\n"
+                + "       direccion=?, cedula=?, genero=?, nombre_usuario=?\n"
                 + " WHERE codigo=?;";
-        
+
         List<Parametro> prts = new ArrayList<>();
         prts.add(new Parametro(1, usuario.getNombre()));
         prts.add(new Parametro(2, usuario.getClave()));
@@ -163,14 +166,15 @@ public class ImpUsuario implements IntUsuario {
         prts.add(new Parametro(7, usuario.getDireccion()));
         prts.add(new Parametro(8, usuario.getCedula()));
         prts.add(new Parametro(9, usuario.getGenero()));
-        prts.add(new Parametro(10, usuario.getCodigo()));
-        
+        prts.add(new Parametro(10, usuario.getNombreUsu()));
+        prts.add(new Parametro(11, usuario.getCodigo()));
+
         try {
-            update=con.querySet(sql, prts);     
+            update = con.querySet(sql, prts);
         } catch (Exception e) {
             throw e;
-        }    
-        
+        }
+
         return update;
     }
 
@@ -187,6 +191,81 @@ public class ImpUsuario implements IntUsuario {
             throw e;
         }
         return delete;
+    }
+
+    @Override
+    public Usuario obtenerCorreoUsuario(String dato) throws Exception {
+        Usuario usuario = null;
+
+        String sql = "SELECT codigo, nombre, clave, tipo, apellido, correo, nivel, direccion, \n"
+                + "       cedula, genero, nombre_usuario\n"
+                + "  FROM usuario WHERE nombre_usuario='"+dato+"' OR correo='"+dato+"' ";
+        try {
+            ResultSet rst = con.queryGet(sql);
+            while (rst.next()) {
+                usuario=new Usuario();
+                usuario.setCodigo(rst.getInt("codigo"));
+                usuario.setNombre(rst.getString("nombre"));
+                usuario.setClave(rst.getString("clave"));
+                usuario.setTipo(rst.getString("tipo"));
+                usuario.setApellido(rst.getString("apellido"));
+                usuario.setCorreo(rst.getString("correo"));
+                usuario.setNivel(rst.getInt("nivel"));
+                usuario.setCedula(rst.getString("cedula"));
+                usuario.setGenero(rst.getString("genero"));
+                usuario.setNombreUsu(rst.getString("nombre_usuario"));
+
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw e;
+        }
+
+        return usuario;
+    }
+
+    @Override
+    public int actualizarClave(Usuario usuario) throws Exception {
+        int update = 0;
+
+        String sql = "UPDATE usuario\n"
+                + "   SET clave=? \n"
+                + " WHERE nombre_usuario=? OR correo=?;";
+
+        List<Parametro> prts = new ArrayList<>();
+        prts.add(new Parametro(1, usuario.getClave()));
+        prts.add(new Parametro(2, usuario.getCorreo()));
+        prts.add(new Parametro(3, usuario.getNombreUsu()));
+
+        try {
+            update = con.querySet(sql, prts);
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return update;
+    }
+
+    @Override
+    public int obtenerNivel(String usua, String clave) throws Exception {
+        int nivel =0;
+        String sql = "SELECT nivel "
+                + "FROM usuario  "
+                + "WHERE nombre_usuario = ? and clave = ?";
+        List<Parametro> prts = new ArrayList<>();        
+        prts.add(new Parametro(1, usua));
+        prts.add(new Parametro(2, clave));        
+        try {
+            ResultSet rst = con.queryGet(sql,prts);
+            while (rst.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setNivel(rst.getInt("nivel"));
+                nivel= usuario.getNivel();
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        
+        return nivel;
     }
 
 }

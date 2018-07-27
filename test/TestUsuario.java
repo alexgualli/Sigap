@@ -28,12 +28,13 @@ public class TestUsuario {
         usuario.setCedula("0698532147");
         usuario.setClave("alex");
         usuario.setCodigo(100);
-        usuario.setCorreo("");
+        usuario.setCorreo("gualli@hotmail.com");
         usuario.setDireccion("");
         usuario.setGenero("masculino");
         usuario.setNivel(1);
         usuario.setNombre("alex");
         usuario.setTipo("administrador");
+        usuario.setNombreUsu("gualli");
         
 
         //INSERTAR
@@ -74,7 +75,7 @@ public class TestUsuario {
         //LISTAR POR LOGIN
         Usuario usuario2 = null;
         try {
-            usuario2 = user.obtenerLogin(usuario.getNombre(), usuario.getClave());
+            usuario2 = user.obtenerLogin(usuario.getNombreUsu(), usuario.getClave());
             System.out.println("Buscado por Login: " + usuario2.toString());
         } catch (Exception e) {
             System.err.println("ERROR! al buscar " + e.getMessage());
@@ -94,6 +95,44 @@ public class TestUsuario {
         }
         assertTrue(lista.size() > 0);
 
+        //BUSCAR POR USUARIO O CORREO
+        Usuario usuario3 = null;
+        String dato = "alex";
+        try {
+            usuario3 = user.obtenerCorreoUsuario(dato);
+            System.out.println("Buscado por correo o usuario: " + usuario3.toString());
+        } catch (Exception e) {
+            System.err.println("ERROR! al buscar " + e.getMessage());
+        }
+        assertTrue(usuario3 != null);
+        
+        //ACTUALIZAR CLAVE
+        
+        update = 0;
+        try {
+            usuario.setClave("unach");
+            update = user.actualizarClave(usuario);
+            if (update > 0) {
+                System.out.println("ACTUALIZADO CLAVE: " + usuario.toString());
+            }
+        } catch (Exception e) {
+            System.err.println("¡ERROR! NO SE PUDO ACTUALIZAR" + e);
+        }
+        assertTrue(update > 0);
+        
+        
+//        //OBTENER NIVEL
+//        int nivel = 0;
+//        try {
+//            nivel = user.obtenerNivel(usuario.getNombreUsu(), usuario.getClave());
+//            if (nivel != 0) {
+//                System.out.println("NIVEL: " + nivel);
+//            }
+//        } catch (Exception e) {
+//            System.err.println("¡ERROR! NO SE PUDO OBTENER EL CODIGO" + e);
+//        }
+//        assertTrue(nivel > 0);
+        
         //ELIMINAR
         int delete = 0;
         try {

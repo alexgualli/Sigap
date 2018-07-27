@@ -34,7 +34,7 @@ public class TestCliente {
         cliente.setCodigo(100);
         cliente.setNombre("Alex");
         cliente.setApellido("Gualli");
-        cliente.setCedula("0604405357");
+        cliente.setCedula("0604405360");
         cliente.setCodigoDis(10);
         cliente.setCorreo("sincuello@gmail.com");
         cliente.setDireccion("la dolo");
@@ -93,6 +93,34 @@ public class TestCliente {
         }
         assertTrue(lista.size() >0);     
         
+        //OBTENER POR CEDULA O NOMBRE
+        String dato ="06044053";
+        List<Cliente> listaCedNom = new ArrayList<>();
+        try {
+            listaCedNom = imp.obtenerCedNom(dato);
+            System.out.println("TODOS LOS CLIENTES "+dato);
+            for (Cliente cli : listaCedNom) {
+                System.out.println("\t" + cli.toString());
+            }
+        } catch (Exception e) {
+            System.err.println("¡ERROR! NINGUN CLIENTE ENCONTRADO: " +e);
+        }
+        assertTrue(listaCedNom.size() >0); 
+        
+        
+        
+        //OBTENER EL CODIGO POR CEDULA
+        int cod=0;
+        try {
+            cod = imp.obtenerCodCed("0604405357");
+            if(cod!=0){
+                System.out.println("CODIGO: " + cod);
+            }
+        } catch (Exception e) {
+            System.err.println("¡ERROR! NINGUN CLIENTE ENCONTRADO: " +e);
+        }
+        assertTrue(cod >0); 
+        
         //ELIMINAR
         int delete = 0;
         try {
@@ -103,7 +131,7 @@ public class TestCliente {
         } catch (Exception e) {
             System.err.println("¡ERROR! NO SE PUDO ELIMINAR: "+ e);
         }
-        assertTrue(delete >= 0);
+        assertTrue(delete >0);
         
         
 
