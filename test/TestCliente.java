@@ -107,7 +107,17 @@ public class TestCliente {
         }
         assertTrue(listaCedNom.size() >0); 
         
-        
+        //OBTENER POR CEDULA 
+        dato ="0604405357";
+        Cliente clie = null;
+        try {
+            clie = imp.obtenerCed(dato);
+            System.out.println("CLIENTES CON CEDULA "+dato+"   "+clie.toString());            
+            
+        } catch (Exception e) {
+            System.err.println("¡ERROR! NINGUN CLIENTE ENCONTRADO CON ESA CEDULA: " +e);
+        }
+        assertTrue(clie != null); 
         
         //OBTENER EL CODIGO POR CEDULA
         int cod=0;

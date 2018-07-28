@@ -20,7 +20,7 @@ public class Coneccion {
     final String DRIVER = "org.postgresql.Driver";
     final String URL = "jdbc:postgresql://localhost:5433/sigap";
     final String USER = "postgres";
-    final String PASSWORD = "alex";
+    final String PASSWORD = "1234";
 
     public void connect() {
         try {

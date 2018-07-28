@@ -22,6 +22,8 @@ public interface IntCliente {
         
     public List<Cliente> obtenerCedNom(String dato) throws Exception;
     
+    public Cliente obtenerCed(String dato) throws Exception;
+    
     public int obtenerCodCed(String cedula) throws Exception;    
         
     public int actualizar(Cliente usuario) throws Exception;

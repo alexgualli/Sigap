@@ -46,7 +46,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>SIGAP</span></a>
+              <a href="FormularioPrincipal.jsp" class="site_title"><i class="fa fa-paw"></i> <span>SIGAP</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -71,36 +71,36 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Informacion</a></li>
+                      <li><a href="FormularioPrincipal.jsp">Informacion</a></li>
                       <li><a href="#">Ayuda</a></li>
                       <li><a href="#">Sobre Nosotros</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Aministracion <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Nuevo Cliente</a></li>
-                      <li><a href="#">Nuevo Usuario</a></li>
+                      <li><a href="FormularioCliente.jsp">Nuevo Cliente</a></li>
+                      <li><a href="FormularioAdministrador.jsp">Nuevo Usuario</a></li>
                       <li><a href="#">Deudas</a></li>
-                      <li><a href="#">Medidores</a></li>
+                      <li><a href="FormularioMedidor.jsp">Medidores</a></li>
                       
                     </ul>
                   </li>
                     <li><a><i class="fa fa-pencil"></i> Lecturas de Medidor<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Nueva Medicion</a></li>
+                        <li><a href="FormularioConsumo.jsp">Nueva Medicion</a></li>
                       
                     </ul>
                   </li>
                   <li><a><i class="fa fa-ticket"></i> Facturacion<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Generar Factura</a></li>
+                        <li><a href="FormularioFactura.jsp">Generar Factura</a></li>
                       
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Reportes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">Reporte de Usuarios</a></li>
-                      <li><a href="#">Reporte de Clientes</a></li>
+                      <li><a href="FormularioReporteCliente.jsp">Reporte de Clientes</a></li>
                       <li><a href="#">Reporte de Pagos</a></li>
                     </ul>
                   </li>
@@ -171,7 +171,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="#">
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="FormularioLogeo.jsp">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -545,7 +545,7 @@
                     $('#myDatepicker').datetimepicker();
 
                     $('#myDatepicker2').datetimepicker({
-                        format: 'DD.MM.YYYY'
+                        format: 'DD-MM-YYYY'
                     });
 
                     $('#myDatepicker3').datetimepicker({

@@ -58,9 +58,6 @@ public class ImpCliente implements IntCliente {
 
     @Override
     public Cliente obtenerCodigo(int id) throws Exception {
-
-        ImpDeuda impDeuda = new ImpDeuda();
-
         Cliente cliente = null;
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
                 + "       codigo_discapacidad, telefono, edad\n"
@@ -114,7 +111,8 @@ public class ImpCliente implements IntCliente {
                 cliente.setEdad(rst.getInt("edad"));
                 lista.add(cliente);
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
+            throw e;
         }
 
         return lista;
@@ -219,5 +217,38 @@ public class ImpCliente implements IntCliente {
         
         return codigo;
     }
+    
+    
+    @Override
+    public Cliente obtenerCed(String dato) throws Exception {
+        Cliente cliente =null;
+        String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
+                + "       codigo_discapacidad, telefono, edad\n"
+                + "  FROM cliente WHERE cedula=? "
+                + "order by apellido ASC;";
+        List<Parametro> prts = new ArrayList<>();
+        prts.add(new Parametro(1, dato));
+        try {
+            ResultSet rst = con.queryGet(sql,prts);
+            while (rst.next()) {
+                cliente = new Cliente();
+                cliente.setCodigo(rst.getInt("codigo"));
+                cliente.setNombre(rst.getString("nombre"));
+                cliente.setApellido(rst.getString("apellido"));
+                cliente.setDireccion(rst.getString("direccion"));
+                cliente.setCedula(rst.getString("cedula"));
+                cliente.setCorreo(rst.getString("correo"));
+                cliente.setFechaNac(rst.getString("fecha_nac"));
+                cliente.setCodigoDis(rst.getInt("codigo_discapacidad"));                
+                cliente.setTelefono(rst.getString("telefono"));
+                cliente.setEdad(rst.getInt("edad"));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            throw e;
+        }
+
+        return cliente ;
+    }
+
 
 }
