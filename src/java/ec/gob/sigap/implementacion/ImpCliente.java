@@ -58,6 +58,7 @@ public class ImpCliente implements IntCliente {
 
     @Override
     public Cliente obtenerCodigo(int id) throws Exception {
+
         Cliente cliente = null;
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
                 + "       codigo_discapacidad, telefono, edad\n"
@@ -88,9 +89,7 @@ public class ImpCliente implements IntCliente {
 
     @Override
     public List<Cliente> obtenerTodos() throws Exception {
-
-        ImpDeuda impDeuda = new ImpDeuda();
-
+        
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
                 + "       codigo_discapacidad, telefono, edad\n"
@@ -112,7 +111,7 @@ public class ImpCliente implements IntCliente {
                 lista.add(cliente);
             }
         } catch (ClassNotFoundException | SQLException e) {
-            throw e;
+            throw  e;
         }
 
         return lista;
@@ -221,15 +220,20 @@ public class ImpCliente implements IntCliente {
     
     @Override
     public Cliente obtenerCed(String dato) throws Exception {
-        Cliente cliente =null;
+        
+        Cliente cliente = null;
+        
         String sql = "SELECT codigo, nombre, apellido, direccion, cedula, correo, fecha_nac, \n"
                 + "       codigo_discapacidad, telefono, edad\n"
-                + "  FROM cliente WHERE cedula=? "
-                + "order by apellido ASC;";
+                + "  FROM cliente "
+                + " WHERE cedula=? ";
+        
         List<Parametro> prts = new ArrayList<>();
+        
         prts.add(new Parametro(1, dato));
+        
         try {
-            ResultSet rst = con.queryGet(sql,prts);
+            ResultSet rst = con.queryGet(sql, prts);
             while (rst.next()) {
                 cliente = new Cliente();
                 cliente.setCodigo(rst.getInt("codigo"));
@@ -247,8 +251,7 @@ public class ImpCliente implements IntCliente {
             throw e;
         }
 
-        return cliente ;
+        return cliente;
     }
-
 
 }
