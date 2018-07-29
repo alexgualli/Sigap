@@ -20,6 +20,14 @@
         <servlet-name>ServMostrarCliente</servlet-name>
         <servlet-class>ec.gob.sigap.servlet.ServMostrarCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerAsignarMedidor</servlet-name>
+        <servlet-class>ec.gob.sigap.servlet.SerAsignarMedidor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServBuscarCliente</servlet-name>
+        <servlet-class>ec.gob.sigap.servlet.ServBuscarCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -33,12 +41,16 @@
         <url-pattern>/IngresoCliente</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServAsignarMedidor</servlet-name>
+        <servlet-name>ServMostrarCliente</servlet-name>
+        <url-pattern>/MostrarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAsignarMedidor</servlet-name>
         <url-pattern>/AsignarMedidor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServMostrarCliente</servlet-name>
-        <url-pattern>/MostrarCliente</url-pattern>
+        <servlet-name>ServBuscarCliente</servlet-name>
+        <url-pattern>/BuscarCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
