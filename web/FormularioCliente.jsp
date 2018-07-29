@@ -39,7 +39,7 @@
 
     <body class="nav-md">
         <%
-        String cedulaBuscar = request.getParameter("txtcedula");
+            String cedulaBuscar = request.getParameter("txtcedula");
         %>
         <div class="container body">
             <div class="main_container">
@@ -428,8 +428,8 @@
 
                                     </div>
                                 </div>                       
-                                
-                                
+
+
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="x_panel">
@@ -497,40 +497,66 @@
                                                                 </div>
                                                                 <div class="x_content">
                                                                     <br />
-                                                                    <form class="form-horizontal form-label-left input_mask">
+                                                                    <form class="form-horizontal form-label-left input_mask" action="BuscarCliente">
                                                                         <div class="input-group">
                                                                             <span class="input-group-btn">
-                                                                                <button type="button" class="btn btn-primary" >Buscar</button>
+                                                                                <button type="submit" class="btn btn-primary" >Buscar</button>
                                                                             </span>
-                                                                            <input type="text" value="<%=cedulaBuscar%>" name="txtbuscar" class="form-control" placeholder="...Buscar Cliente" title="Buscar Cliente">
+                                                                            <input name="txtbuscar" type="text" class="form-control" placeholder="...Buscar Cliente" title="Buscar Cliente">
                                                                         </div>
+                                                                    </form>
+
+                                                                    <%
+                                                                        Cliente cli = new Cliente();
+                                                                        cli.setApellido("Ninguno");
+                                                                        cli.setNombre("Ninguno");
+                                                                        cli.setCorreo("Ninguno");
+                                                                        cli.setTelefono("Ninguno");
+
+                                                                        if (request.getSession().getAttribute("clientebus") != null) {
+                                                                            cli = (Cliente) request.getSession().getAttribute("clientebus");
+                                                                        } else {
+                                                                            out.print("sin parametro");
+                                                                        }
+
+                                                                        int codigocli = cli.getCodigo();
+                                                                    %>
+
+                                                                    <form class="form-horizontal form-label-left input_mask" action="AsignarMedidor">
+
 
                                                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                            <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre" readonly="readonly">
+                                                                            <input value="<%=cli.getNombre()%>" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre" readonly="readonly">
                                                                             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
                                                                         </div>
 
                                                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                            <input type="text" class="form-control" id="inputSuccess3" placeholder="Apellido" readonly="readonly">
+                                                                            <input value="<%=cli.getApellido()%>" type="text" class="form-control" id="inputSuccess3" placeholder="Apellido" readonly="readonly">
                                                                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                                                         </div>
 
                                                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                            <input type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email"readonly="readonly">
+                                                                            <input value="<%=cli.getCorreo()%>" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="Email"readonly="readonly">
                                                                             <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                                                                         </div>
 
                                                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                                            <input type="text" class="form-control" id="inputSuccess5" placeholder="Telefono" readonly="readonly">
+                                                                            <input value="<%=cli.getTelefono()%>" type="text" class="form-control" id="inputSuccess5" placeholder="Telefono" readonly="readonly">
                                                                             <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                                                                         </div>
 
-
+                                                                        <%%>
 
                                                                         <div class="form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"> Codigo de Medidor</label>
                                                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                                                <input type="text" name="txtcodigomed" class="form-control" placeholder="Ingrese el codigo del medidor" required="required">
+                                                                                <input name="txtcodigomed" type="text" class="form-control" placeholder="Ingrese el codigo del medidor" required="required">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Cédula del Cliente </label>
+                                                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                                <input value="<%=cli.getCedula()%>" name="txtcedulacli" type="text" class="form-control">
                                                                             </div>
                                                                         </div>
 
@@ -538,8 +564,8 @@
                                                                         <div class="form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de Medidor</label>
                                                                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                                                                <select class="form-control" required="required" name="txttipomed">
-                                                                                    <option disabled="" >Tipo de Medidor</option>
+                                                                                <select class="form-control" required="required" name="txttipomed" >
+                                                                                    <option disabled="">Tipo de Medidor</option>
                                                                                     <option value="residencial">Medidor Residencial</option>
                                                                                     <option value="comercial">Medidor Comercial</option>
 
