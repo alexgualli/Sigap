@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="ec.gob.sigap.entidades.Cliente"%>
+<%@page import="ec.gob.sigap.entidades.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html >
@@ -327,12 +328,20 @@
 
 
                                             <span class="section">Informacion de Cliente</span>
+                                            
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Cedula <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="tel" id="telephone" name="txtcedula" required="required" data-validate-length-range="8,10" class="form-control col-md-7 col-xs-12" placeholder="1234567890">
+                                                </div>
+                                            </div>
 
                                             <div class="item form-group">
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nombres <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="txtnombre" placeholder="Jhonatan Israel" required="required" type="text">
+                                                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="txtnombre" placeholder="Jhonatan Israel" required="required" type="text">
                                                 </div>
                                             </div>
                                             <div class="item form-group">
@@ -352,10 +361,10 @@
 
 
                                             <div class="item form-group">
-                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Cedula <span class="required">*</span>
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telefono <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input type="tel" id="telephone" name="txtcedula" required="required" data-validate-length-range="8,10" class="form-control col-md-7 col-xs-12" placeholder="1234567890">
+                                                    <input type="tel" id="telephone" name="txttelefono" data-validate-length-range="8,10" class="form-control col-md-7 col-xs-12" placeholder="1234567890">
                                                 </div>
                                             </div>
 
@@ -503,7 +512,7 @@
                                                                             <span class="input-group-btn">
                                                                                 <button type="submit" class="btn btn-primary" >Buscar</button>
                                                                             </span>
-                                                                            <input name="txtbuscar" type="text" class="form-control" placeholder="...Buscar Cliente" title="Buscar Cliente">
+                                                                            <input name="txtbuscar" value="<%=cedulaBuscar%>" type="text" class="form-control" placeholder="...Buscar Cliente" title="Buscar Cliente">
                                                                         </div>
                                                                     </form>
 
@@ -520,7 +529,6 @@
                                                                             out.print("sin parametro");
                                                                         }
 
-                                                                        int codigocli = cli.getCodigo();
                                                                     %>
 
                                                                     <form class="form-horizontal form-label-left input_mask" action="AsignarMedidor">
@@ -546,6 +554,7 @@
                                                                             <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
                                                                         </div>
 
+                                                                            
                                                                         <%%>
 
                                                                         <div class="form-group">
