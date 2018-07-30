@@ -533,7 +533,6 @@
 
                                                                     <form class="form-horizontal form-label-left input_mask" action="AsignarMedidor">
 
-
                                                                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                                                             <input value="<%=cli.getNombre()%>" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Nombre" readonly="readonly">
                                                                             <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
@@ -570,7 +569,6 @@
                                                                             </div>
                                                                         </div>
 
-
                                                                         <div class="form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de Medidor</label>
                                                                             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -590,17 +588,11 @@
                                                                                 <button type="submit" class="btn btn-success">Aceptar</button>
                                                                             </div>
                                                                         </div>
-
                                                                     </form>
                                                                 </div>
                                                             </div>
-
                                                         </div>
-
-
-
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
