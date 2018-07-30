@@ -6,7 +6,9 @@
 package ec.gob.sigap.servlet;
 
 import ec.gob.sigap.entidades.Cliente;
+import ec.gob.sigap.entidades.Deuda;
 import ec.gob.sigap.implementacion.ImpCliente;
+import ec.gob.sigap.implementacion.ImpDeuda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -47,10 +49,14 @@ public class ServIngresoCliente extends HttpServlet {
             String telefono = request.getParameter("txttelefono");
             int edad = Integer.parseInt(request.getParameter("txtedad"));
             int codigdis = Integer.parseInt(request.getParameter("txtcodis"));
+            int codigodeu = 0;
             
-            
+            ImpCliente impcliente = new ImpCliente();
+            ImpDeuda impDeuda = new ImpDeuda();
             
             Cliente cliente = new Cliente();
+            Cliente cliente2 = new Cliente();
+            Deuda deuda = new Deuda();
        
             cliente.setApellido(apellido);
             cliente.setCedula(cedula);
@@ -60,22 +66,41 @@ public class ServIngresoCliente extends HttpServlet {
             cliente.setNombre(nombre);
             cliente.setTelefono(telefono);
             cliente.setEdad(edad);
-            boolean mod=false;
             
             if(correo!=""){
                 cliente.setCorreo(correo);                
             }
             else{
                 cliente.setCorreo(cedula+"@sigap.com");                
-            }       
-            ImpCliente impcliente = new ImpCliente();
+            }     
+            
+            if(telefono!=""){
+                cliente.setTelefono(telefono);                
+            }
+            else{
+                cliente.setTelefono("1111111111");                
+            }  
+            
             try {                
-                impcliente.insertar(cliente);
-                mod=true;
+                impcliente.insertar(cliente);                 
             } catch (Exception ex) {
                 Logger.getLogger(ServIngresoCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.getSession().setAttribute("modal", mod);
+            
+            
+            try {
+                cliente2=impcliente.obtenerCed(cedula);                     
+                codigodeu=cliente2.getCodigo();
+                deuda.setCodigo(codigodeu);
+                deuda.setCliente(cliente2);
+                impDeuda.insertar(deuda);
+            } catch (Exception ex) {
+                Logger.getLogger(ServIngresoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            
+            
             request.getRequestDispatcher("FormularioCliente.jsp").forward(request, response);
             
             
