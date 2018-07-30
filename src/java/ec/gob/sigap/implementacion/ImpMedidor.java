@@ -77,6 +77,7 @@ public class ImpMedidor implements IntMedidor {
         String sql = "SELECT codigo, codigo_cliente, tipo_de_medidor\n"
                 + "  FROM public.medidor;";
         try {
+            
             ResultSet rst = con.queryGet(sql);
             while (rst.next()) {
                 Medidor medidor = new Medidor();
